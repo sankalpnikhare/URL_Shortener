@@ -1,11 +1,168 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Your url</title>
-    </head>
-    <body>
-        <h2>This is your url</h2>
-        <br><br>
-        <p><%= url %></p>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your URL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.6s ease-out;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .redirect-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .url-display {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .url-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 12px;
+        }
+
+        .url-display a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            word-break: break-all;
+            line-height: 1.6;
+            transition: color 0.2s ease;
+        }
+
+        .url-display a:hover {
+            color: #c4b5fd;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .visit-btn:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .back-link span {
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="redirect-icon">🌐</div>
+        <h1>Original URL</h1>
+        <p class="subtitle">Here's the destination for your short link</p>
+        <div class="url-display">
+            <p class="url-label">Destination URL</p>
+            <a href="<%= url %>" target="_blank">
+                <%= url %>
+            </a>
+        </div>
+        <a href="<%= url %>" target="_blank" class="visit-btn">Visit URL →</a>
+        <br>
+        <a href="/" class="back-link"><span>←</span> Shorten another URL</a>
+    </div>
+</body>
+
 </html>

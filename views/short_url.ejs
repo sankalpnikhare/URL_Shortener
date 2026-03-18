@@ -1,10 +1,189 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Url shorten</title>
-    </head>
-    <body>
-        <p><%=our_url%></p>
-        <p>This is the url of yours</p>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortened!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.6s ease-out;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            animation: popIn 0.5s ease-out 0.3s both;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .url-box {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .url-box a {
+            color: #a8e063;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            word-break: break-all;
+            text-align: left;
+            transition: color 0.2s ease;
+        }
+
+        .url-box a:hover {
+            color: #c0f080;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            color: #0f0c29;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(86, 171, 47, 0.35);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .back-link span {
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>Link Shortened!</h1>
+        <p class="subtitle">Your shortened URL is ready to share</p>
+        <div class="url-box">
+            <a href="<%= our_url %>" target="_blank" id="shortUrl">
+                <%= our_url %>
+            </a>
+            <button class="copy-btn" onclick="copyUrl()">Copy</button>
+        </div>
+        <a href="/" class="back-link"><span>←</span> Shorten another URL</a>
+    </div>
+
+    <script>
+        function copyUrl() {
+            const url = document.getElementById('shortUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                btn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.style.background = 'linear-gradient(135deg, #56ab2f, #a8e063)';
+                    btn.style.color = '#0f0c29';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
 </html>
