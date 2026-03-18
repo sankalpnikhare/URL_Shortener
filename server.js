@@ -22,7 +22,19 @@ app.get('/', (req,res)=>{
     res.render('form')
 })
 
+app.get('/:id' , async  (req,res)=>{
+    let url_id = req.params.id ; 
 
+    const result = await model.findOne({ url_id: url_id });
+
+    if(!result ){
+        return res.send("Not Found");
+    }
+    const url = result.url ; 
+    res.render("your_url" , {url});
+
+    
+})
 
 app.post('/url', async (req , res )=>{
     const u_id = nanoid(7); 
