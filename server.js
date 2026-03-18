@@ -1,8 +1,13 @@
 const dotenv =  require('dotenv');
+dotenv.config();
 const express =  require('express');
 const mongoose = require('mongoose');
 const mongodb_connect = require('./db/mongodb_connect');
-dotenv.config();
+const model = require('./db/model/model');
+const { nanoid } = require('nanoid');
+
+
+
 
 
 const app = express();
@@ -13,6 +18,34 @@ app.use(express.json());
 
 mongodb_connect();
 
+app.get('/', (req,res)=>{
+    res.render('form')
+})
+
+
+
+app.post('/url', async (req , res )=>{
+    const u_id = nanoid(7); 
+    const {url} = req.body ; 
+
+    if(!url){
+        return res.send("Please Submit the url")
+    }
+
+    const newUrl = new model({
+        url:url ,
+        url_id: u_id
+    });
+    await newUrl.save();
+
+    const our_url = `http://localhost:3000/${u_id}`;
+
+    res.render('short_url' , {our_url})
+    
+
+    
+
+})
 
 app.listen(process.env.PORT || 3000 , ()=>{
     
